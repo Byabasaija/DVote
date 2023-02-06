@@ -143,8 +143,8 @@
     }
   }
 })({"1xC6H":[function(require,module,exports) {
-var Refresh = require("1068a78f412ffe34");
-var ErrorOverlay = require("279416bf04227fce");
+var Refresh = require("faf9c45a8fae094");
+var ErrorOverlay = require("4d899938acd7c366");
 Refresh.injectIntoGlobalHook(window);
 window.$RefreshReg$ = function() {};
 window.$RefreshSig$ = function() {
@@ -163,7 +163,7 @@ window.addEventListener("parcelhmraccept", ()=>{
     ErrorOverlay.dismissRuntimeErrors();
 });
 
-},{"1068a78f412ffe34":"786KC","279416bf04227fce":"1dldy"}],"786KC":[function(require,module,exports) {
+},{"faf9c45a8fae094":"786KC","4d899938acd7c366":"1dldy"}],"786KC":[function(require,module,exports) {
 "use strict";
 module.exports = require("774f1e78f5b65b85");
 
@@ -27122,11 +27122,15 @@ function App({ isSignedIn , contractId , wallet  }) {
     const [valueFromBlockchain, setValueFromBlockchain] = (0, _reactDefault.default).useState();
     const [uiPleaseWait, setUiPleaseWait] = (0, _reactDefault.default).useState(true);
     // Get blockchian state once on component load
-    (0, _reactDefault.default).useEffect(()=>{
-        getGreeting().then(setValueFromBlockchain).catch(alert).finally(()=>{
-            setUiPleaseWait(false);
-        });
-    }, []);
+    // React.useEffect(() => {
+    //   getGreeting()
+    //     .then(setValueFromBlockchain)
+    //     .catch(alert)
+    //     .finally(() => {
+    //       setUiPleaseWait(false);
+    //     });
+    //   }
+    // , []);
     /// If user not signed-in with wallet - show prompt
     if (!isSignedIn) // Sign-in flow will reload the page later
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _uiComponents.SignInPrompt), {
@@ -27134,132 +27138,31 @@ function App({ isSignedIn , contractId , wallet  }) {
         onClick: ()=>wallet.signIn()
     }, void 0, false, {
         fileName: "App.js",
-        lineNumber: 29,
+        lineNumber: 27,
         columnNumber: 12
     }, this);
-    function changeGreeting(e) {
-        e.preventDefault();
-        setUiPleaseWait(true);
-        const { greetingInput  } = e.target.elements;
-        // use the wallet to send the greeting to the contract
-        wallet.callMethod({
-            method: "set_greeting",
-            args: {
-                message: greetingInput.value
-            },
-            contractId
-        }).then(async ()=>{
-            return getGreeting();
-        }).then(setValueFromBlockchain).finally(()=>{
-            setUiPleaseWait(false);
-        });
-    }
-    function getGreeting() {
-        // use the wallet to query the contract's greeting
-        return wallet.viewMethod({
-            method: "get_greeting",
-            contractId
-        });
-    }
+    // function changeGreeting(e) {
+    //   e.preventDefault();
+    //   setUiPleaseWait(true);
+    //   const { greetingInput } = e.target.elements;
+    // use the wallet to send the greeting to the contract
+    //   wallet.callMethod({ method: 'set_greeting', args: { message: greetingInput.value }, contractId })
+    //     .then(async () => {return getGreeting();})
+    //     .then(setValueFromBlockchain)
+    //     .finally(() => {
+    //       setUiPleaseWait(false);
+    //     });
+    // }
     return /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _jsxDevRuntime.Fragment), {
-        children: [
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _uiComponents.SignOutButton), {
-                accountId: wallet.accountId,
-                onClick: ()=>wallet.signOut()
-            }, void 0, false, {
-                fileName: "App.js",
-                lineNumber: 53,
-                columnNumber: 7
-            }, this),
-            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("main", {
-                className: uiPleaseWait ? "please-wait" : "",
-                children: [
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("h1", {
-                        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                            className: "greeting",
-                            children: valueFromBlockchain
-                        }, void 0, false, {
-                            fileName: "App.js",
-                            lineNumber: 57,
-                            columnNumber: 11
-                        }, this)
-                    }, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 56,
-                        columnNumber: 7
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, {
-                        fileName: "App.js",
-                        lineNumber: 59,
-                        columnNumber: 7
-                    }, this),
-                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("form", {
-                        onSubmit: changeGreeting,
-                        className: "change",
-                        children: [
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("label", {
-                                children: "Poll Name"
-                            }, void 0, false, {
-                                fileName: "App.js",
-                                lineNumber: 61,
-                                columnNumber: 11
-                            }, this),
-                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                children: [
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("input", {
-                                        autoComplete: "off",
-                                        defaultValue: valueFromBlockchain,
-                                        id: "greetingInput"
-                                    }, void 0, false, {
-                                        fileName: "App.js",
-                                        lineNumber: 63,
-                                        columnNumber: 13
-                                    }, this),
-                                    /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("button", {
-                                        children: [
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("span", {
-                                                children: "Save"
-                                            }, void 0, false, {
-                                                fileName: "App.js",
-                                                lineNumber: 69,
-                                                columnNumber: 15
-                                            }, this),
-                                            /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)("div", {
-                                                className: "loader"
-                                            }, void 0, false, {
-                                                fileName: "App.js",
-                                                lineNumber: 70,
-                                                columnNumber: 15
-                                            }, this)
-                                        ]
-                                    }, void 0, true, {
-                                        fileName: "App.js",
-                                        lineNumber: 68,
-                                        columnNumber: 13
-                                    }, this)
-                                ]
-                            }, void 0, true, {
-                                fileName: "App.js",
-                                lineNumber: 62,
-                                columnNumber: 11
-                            }, this)
-                        ]
-                    }, void 0, true, {
-                        fileName: "App.js",
-                        lineNumber: 60,
-                        columnNumber: 9
-                    }, this)
-                ]
-            }, void 0, true, {
-                fileName: "App.js",
-                lineNumber: 55,
-                columnNumber: 7
-            }, this)
-        ]
-    }, void 0, true);
+        children: /*#__PURE__*/ (0, _jsxDevRuntime.jsxDEV)((0, _homeDefault.default), {}, void 0, false, {
+            fileName: "App.js",
+            lineNumber: 47,
+            columnNumber: 5
+        }, this)
+    }, void 0, false);
 }
 exports.default = App;
-_s(App, "kS24ka7QLm9/xaObsbkZiE5+6uE=");
+_s(App, "KjUWRqKEZsY2aVqugv7Aif4HWrs=");
 _c = App;
 var _c;
 $RefreshReg$(_c, "App");
@@ -28380,7 +28283,8 @@ const polls = [
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 // Wallet that simplifies using the wallet selector
-parcelHelpers.export(exports, "Wallet", ()=>Wallet);
+parcelHelpers.export(exports, "Wallet", ()=>Wallet) // add build directory to .gitignore file 
+;
 var _nearApiJs = require("near-api-js");
 // wallet selector UI
 var _stylesCss = require("@near-wallet-selector/modal-ui/styles.css");
@@ -28393,7 +28297,7 @@ var _myNearWalletIconPngDefault = parcelHelpers.interopDefault(_myNearWalletIcon
 var _core = require("@near-wallet-selector/core");
 var _ledger = require("@near-wallet-selector/ledger");
 var _myNearWallet = require("@near-wallet-selector/my-near-wallet");
-var Buffer = require("c1c048dc9c188f1a").Buffer;
+var Buffer = require("fdc838fa3b931570").Buffer;
 const THIRTY_TGAS = "30000000000000";
 const NO_DEPOSIT = "0";
 class Wallet {
@@ -28490,15 +28394,15 @@ class Wallet {
     }
 }
 
-},{"c1c048dc9c188f1a":"jvRW7","near-api-js":"ohc3m","@near-wallet-selector/modal-ui/styles.css":"b4TAP","@near-wallet-selector/modal-ui":"1nDKo","@near-wallet-selector/ledger/assets/ledger-icon.png":"dGAA6","@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png":"aTHwi","@near-wallet-selector/core":"eEY3a","@near-wallet-selector/ledger":"9enQf","@near-wallet-selector/my-near-wallet":"bYYGG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"jvRW7":[function(require,module,exports) {
+},{"fdc838fa3b931570":"5trgY","near-api-js":"ohc3m","@near-wallet-selector/modal-ui/styles.css":"b4TAP","@near-wallet-selector/modal-ui":"1nDKo","@near-wallet-selector/ledger/assets/ledger-icon.png":"dGAA6","@near-wallet-selector/my-near-wallet/assets/my-near-wallet-icon.png":"aTHwi","@near-wallet-selector/core":"eEY3a","@near-wallet-selector/ledger":"9enQf","@near-wallet-selector/my-near-wallet":"bYYGG","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"5trgY":[function(require,module,exports) {
 /*!
  * The buffer module from node.js, for the browser.
  *
  * @author   Feross Aboukhadijeh <https://feross.org>
  * @license  MIT
  */ /* eslint-disable no-proto */ "use strict";
-var base64 = require("576b400bbb792079");
-var ieee754 = require("42dc1f5617a62d4a");
+var base64 = require("35a1db9993b48af1");
+var ieee754 = require("f97d1cba70b37d1f");
 var customInspectSymbol = typeof Symbol === "function" && typeof Symbol["for"] === "function" // eslint-disable-line dot-notation
  ? Symbol["for"]("nodejs.util.inspect.custom") // eslint-disable-line dot-notation
  : null;
@@ -29720,7 +29624,7 @@ var hexSliceLookupTable = function() {
     return table;
 }();
 
-},{"576b400bbb792079":"lcKUm","42dc1f5617a62d4a":"h3A81"}],"lcKUm":[function(require,module,exports) {
+},{"35a1db9993b48af1":"2JAOi","f97d1cba70b37d1f":"loqnQ"}],"2JAOi":[function(require,module,exports) {
 "use strict";
 exports.byteLength = byteLength;
 exports.toByteArray = toByteArray;
@@ -29820,7 +29724,7 @@ function fromByteArray(uint8) {
     return parts.join("");
 }
 
-},{}],"h3A81":[function(require,module,exports) {
+},{}],"loqnQ":[function(require,module,exports) {
 /*! ieee754. BSD-3-Clause License. Feross Aboukhadijeh <https://feross.org/opensource> */ exports.read = function(buffer, offset, isLE, mLen, nBytes) {
     var e, m;
     var eLen = nBytes * 8 - mLen - 1;
@@ -33064,7 +32968,7 @@ function deserializeUnchecked(schema, classType, buffer, Reader = BinaryReader) 
 }
 exports.deserializeUnchecked = deserializeUnchecked;
 
-},{"b694bccd459310fb":"jvRW7","194ef81b4d881a47":"9pdNn","32d12bdbe16b1d3c":"4ji3p","c16b0ff1f3c77b94":"feCA6"}],"9pdNn":[function(require,module,exports) {
+},{"b694bccd459310fb":"5trgY","194ef81b4d881a47":"9pdNn","32d12bdbe16b1d3c":"4ji3p","c16b0ff1f3c77b94":"feCA6"}],"9pdNn":[function(require,module,exports) {
 (function(module1, exports) {
     "use strict";
     // Utils
@@ -35989,7 +35893,7 @@ SafeBuffer.allocUnsafeSlow = function(size) {
     return buffer.SlowBuffer(size);
 };
 
-},{"78444c4566ff1787":"jvRW7"}],"feCA6":[function(require,module,exports) {
+},{"78444c4566ff1787":"5trgY"}],"feCA6":[function(require,module,exports) {
 "use strict";
 // This is free and unencumbered software released into the public domain.
 // See LICENSE.md for more information.
@@ -36855,7 +36759,7 @@ exports.Provider = Provider;
 }
 exports.getTransactionLastResult = getTransactionLastResult;
 
-},{"fdc027560579bb1":"jvRW7"}],"kzXVU":[function(require,module,exports) {
+},{"fdc027560579bb1":"5trgY"}],"kzXVU":[function(require,module,exports) {
 var Buffer = require("1ed2472f43ee0cff").Buffer;
 "use strict";
 var __importDefault = this && this.__importDefault || function(mod) {
@@ -37215,7 +37119,7 @@ let _nextId = 123;
 }
 exports.JsonRpcProvider = JsonRpcProvider;
 
-},{"1ed2472f43ee0cff":"jvRW7","61bf4a3ae51d5204":"2jGeI","b0dac005eeda3ce5":"cUEh0","904d04ce9fa68bda":"iSqiB","6a163878a02518de":"btMYy","c8fd9901a752c283":"e0LBZ","99333174a1df6eb":"51I5X","7818ce5579c340f6":"1TB1L"}],"2jGeI":[function(require,module,exports) {
+},{"1ed2472f43ee0cff":"5trgY","61bf4a3ae51d5204":"2jGeI","b0dac005eeda3ce5":"cUEh0","904d04ce9fa68bda":"iSqiB","6a163878a02518de":"btMYy","c8fd9901a752c283":"e0LBZ","99333174a1df6eb":"51I5X","7818ce5579c340f6":"1TB1L"}],"2jGeI":[function(require,module,exports) {
 /*!
  * depd
  * Copyright(c) 2015 Douglas Christopher Wilson
@@ -39207,7 +39111,7 @@ async function signTransaction(...args) {
 }
 exports.signTransaction = signTransaction;
 
-},{"941be1ac27891c89":"jvRW7","6a6eb74500932331":"ahVaM","11d973c6f8dcb5cb":"kjmPo","6cf74a57ad96d5f0":"e0LBZ","acb6c1a5738dbd09":"kBQFP"}],"ahVaM":[function(require,module,exports) {
+},{"941be1ac27891c89":"5trgY","6a6eb74500932331":"ahVaM","11d973c6f8dcb5cb":"kjmPo","6cf74a57ad96d5f0":"e0LBZ","acb6c1a5738dbd09":"kBQFP"}],"ahVaM":[function(require,module,exports) {
 var global = arguments[3];
 var process = require("e97b1c858c4d99f5");
 /**
@@ -40213,7 +40117,7 @@ function bytesJsonStringify(input) {
 }
 exports.Account = Account;
 
-},{"172cd78e46c44887":"jvRW7","a14e854458a2bd58":"9pdNn","f54c591fb928068b":"2jGeI","5125f215e775cfc0":"jJQ5a","7d10081cc4e0a99":"gtL2a","34678e7b77f3da0e":"e0LBZ","8190ed4222a662af":"kBQFP","64b697e89231d163":"btMYy","14346ca13e74a885":"1TB1L","25040168fc4be3e7":"lUNnG","91e8e44a6c8e8be1":"51I5X"}],"lUNnG":[function(require,module,exports) {
+},{"172cd78e46c44887":"5trgY","a14e854458a2bd58":"9pdNn","f54c591fb928068b":"2jGeI","5125f215e775cfc0":"jJQ5a","7d10081cc4e0a99":"gtL2a","34678e7b77f3da0e":"e0LBZ","8190ed4222a662af":"kBQFP","64b697e89231d163":"btMYy","14346ca13e74a885":"1TB1L","25040168fc4be3e7":"lUNnG","91e8e44a6c8e8be1":"51I5X"}],"lUNnG":[function(require,module,exports) {
 "use strict";
 var __importDefault = this && this.__importDefault || function(mod) {
     return mod && mod.__esModule ? mod : {
@@ -40553,7 +40457,7 @@ const convertActions = (actions, accountId, receiverId)=>actions.map((a)=>{
         return action;
     });
 
-},{"a72fdb1a9e50fa64":"jvRW7","9ed0b4bce46478e0":"9pdNn","cc49b311913766fa":"2jGeI","aa65fb390e95c8c2":"hxSQV","bc1b4a16e25d41a8":"16c5X","ec94872067db1e44":"kBQFP","d93257bebc648701":"jJQ5a","6df345f1765911b0":"iSqiB"}],"aQbxV":[function(require,module,exports) {
+},{"a72fdb1a9e50fa64":"5trgY","9ed0b4bce46478e0":"9pdNn","cc49b311913766fa":"2jGeI","aa65fb390e95c8c2":"hxSQV","bc1b4a16e25d41a8":"16c5X","ec94872067db1e44":"kBQFP","d93257bebc648701":"jJQ5a","6df345f1765911b0":"iSqiB"}],"aQbxV":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -41248,7 +41152,7 @@ exports.WalletAccount = WalletConnection;
 }
 exports.ConnectedWalletAccount = ConnectedWalletAccount;
 
-},{"b0218a5d30c875d7":"jvRW7","417cf0e70e28f8f9":"2jGeI","e287db32f4ddb61a":"hxSQV","d7f18c908117c1a5":"jJQ5a","d2f5fa7c819548f8":"jOCMH","76a89592f697d86e":"e0LBZ"}],"7yTE6":[function(require,module,exports) {
+},{"b0218a5d30c875d7":"5trgY","417cf0e70e28f8f9":"2jGeI","e287db32f4ddb61a":"hxSQV","d7f18c908117c1a5":"jJQ5a","d2f5fa7c819548f8":"jOCMH","76a89592f697d86e":"e0LBZ"}],"7yTE6":[function(require,module,exports) {
 "use strict";
 Object.defineProperty(exports, "__esModule", {
     value: true
@@ -53521,19 +53425,19 @@ module.exports = function() {
 };
 
 },{}],"20hbG":[function(require,module,exports) {
-const Utils = require("a61d3bc27e288050");
-const ECLevel = require("8db94f7ead0ca18d");
-const BitBuffer = require("59c4f69648ce4");
-const BitMatrix = require("515ab398263ec47");
-const AlignmentPattern = require("2c4f2b7e97fd6bb9");
-const FinderPattern = require("fcf1d0df42905006");
-const MaskPattern = require("d7c8e27361629afb");
-const ECCode = require("26c39d92e8e13e7e");
-const ReedSolomonEncoder = require("de144641bb5ef374");
-const Version = require("6dee7533da5eeab8");
-const FormatInfo = require("6e19836214a7d19f");
-const Mode = require("f1cc5ff6e860cebc");
-const Segments = require("8375c01d08431668");
+const Utils = require("f35aedb90fc9f739");
+const ECLevel = require("c3aeb2213164e95f");
+const BitBuffer = require("813f134c1e73d1b6");
+const BitMatrix = require("7624a68dc0b90581");
+const AlignmentPattern = require("a3404467213f1f3c");
+const FinderPattern = require("5c62368cab1c3835");
+const MaskPattern = require("3db552eaea10aed4");
+const ECCode = require("dd4c6a4e3a4b9ef5");
+const ReedSolomonEncoder = require("7fbf79ff60d1a0ed");
+const Version = require("836fdd4b7dd5c219");
+const FormatInfo = require("b216f24a2be7cdc3");
+const Mode = require("107e452b6a72df03");
+const Segments = require("d9e3cf4caf2e912");
 /**
  * QRCode for JavaScript
  *
@@ -53869,7 +53773,7 @@ const Segments = require("8375c01d08431668");
     return createSymbol(data, version, errorCorrectionLevel, mask);
 };
 
-},{"a61d3bc27e288050":"iXLHI","8db94f7ead0ca18d":"kbPwo","59c4f69648ce4":"kiPfj","515ab398263ec47":"fTjkX","2c4f2b7e97fd6bb9":"1o9KB","fcf1d0df42905006":"dc6Ma","d7c8e27361629afb":"fyimH","26c39d92e8e13e7e":"5yWYH","de144641bb5ef374":"47Qq0","6dee7533da5eeab8":"a8ag2","6e19836214a7d19f":"iThdR","f1cc5ff6e860cebc":"f1e9A","8375c01d08431668":"4tKki"}],"iXLHI":[function(require,module,exports) {
+},{"f35aedb90fc9f739":"iXLHI","c3aeb2213164e95f":"kbPwo","813f134c1e73d1b6":"kiPfj","7624a68dc0b90581":"fTjkX","a3404467213f1f3c":"1o9KB","5c62368cab1c3835":"dc6Ma","3db552eaea10aed4":"fyimH","dd4c6a4e3a4b9ef5":"5yWYH","7fbf79ff60d1a0ed":"47Qq0","836fdd4b7dd5c219":"a8ag2","b216f24a2be7cdc3":"iThdR","107e452b6a72df03":"f1e9A","d9e3cf4caf2e912":"4tKki"}],"iXLHI":[function(require,module,exports) {
 let toSJISFunction;
 const CODEWORDS_COUNT = [
     0,
@@ -55872,7 +55776,7 @@ module.exports = KanjiData;
 module.exports = dijkstra;
 
 },{}],"2oGFV":[function(require,module,exports) {
-const Utils = require("651f1a7a72409153");
+const Utils = require("ff85e22d36fb6758");
 function clearCanvas(ctx, canvas, size) {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     if (!canvas.style) canvas.style = {};
@@ -55918,7 +55822,7 @@ exports.renderToDataURL = function renderToDataURL(qrData, canvas, options) {
     return canvasEl.toDataURL(type, rendererOpts.quality);
 };
 
-},{"651f1a7a72409153":"6rMWz"}],"6rMWz":[function(require,module,exports) {
+},{"ff85e22d36fb6758":"6rMWz"}],"6rMWz":[function(require,module,exports) {
 function hex2rgba(hex) {
     if (typeof hex === "number") hex = hex.toString();
     if (typeof hex !== "string") throw new Error("Color should be defined as hex string");
@@ -55993,7 +55897,7 @@ exports.qrToImageData = function qrToImageData(imgData, qr, opts) {
 };
 
 },{}],"7Akrj":[function(require,module,exports) {
-const Utils = require("5d68748d3c8293bc");
+const Utils = require("c68d2801ed49f26a");
 function getColorAttrib(color, attrib) {
     const alpha = color.a / 255;
     const str = attrib + '="' + color.hex + '"';
@@ -56042,7 +55946,7 @@ exports.render = function render(qrData, options, cb) {
     return svgTag;
 };
 
-},{"5d68748d3c8293bc":"6rMWz"}],"fLPFI":[function(require,module,exports) {
+},{"c68d2801ed49f26a":"6rMWz"}],"fLPFI":[function(require,module,exports) {
 "use strict";
 var deselectCurrent = require("fc3e5b4d6d891695");
 var clipboardToIE11Formatting = {
@@ -56158,9 +56062,9 @@ module.exports = function() {
 };
 
 },{}],"dGAA6":[function(require,module,exports) {
-module.exports = require("a4e0a81d5eaa9d8b").getBundleURL("UckoE") + "ledger-icon.a0186cc1.png" + "?" + Date.now();
+module.exports = require("90533fa597cb5c1d").getBundleURL("UckoE") + "ledger-icon.a0186cc1.png" + "?" + Date.now();
 
-},{"a4e0a81d5eaa9d8b":"lgJ39"}],"lgJ39":[function(require,module,exports) {
+},{"90533fa597cb5c1d":"lgJ39"}],"lgJ39":[function(require,module,exports) {
 "use strict";
 var bundleURL = {};
 function getBundleURLCached(id) {
@@ -56195,9 +56099,9 @@ exports.getBaseURL = getBaseURL;
 exports.getOrigin = getOrigin;
 
 },{}],"aTHwi":[function(require,module,exports) {
-module.exports = require("8e3b4dc3a337a28f").getBundleURL("UckoE") + "my-near-wallet-icon.ebfed669.png" + "?" + Date.now();
+module.exports = require("d98034eb387ce6a3").getBundleURL("UckoE") + "my-near-wallet-icon.ebfed669.png" + "?" + Date.now();
 
-},{"8e3b4dc3a337a28f":"lgJ39"}],"9enQf":[function(require,module,exports) {
+},{"d98034eb387ce6a3":"lgJ39"}],"9enQf":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "setupLedger", ()=>setupLedger);
@@ -58465,7 +58369,7 @@ function setupLedger({ iconUrl =icon , deprecated =false  } = {}) {
         });
 }
 
-},{"dcc88b30d6062520":"jvRW7","is-mobile":"2AVrM","@near-wallet-selector/wallet-utils":"5gEB8","@near-wallet-selector/core":"eEY3a","@ledgerhq/hw-transport-webhid":"8O295","near-api-js":"ohc3m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2AVrM":[function(require,module,exports) {
+},{"dcc88b30d6062520":"5trgY","is-mobile":"2AVrM","@near-wallet-selector/wallet-utils":"5gEB8","@near-wallet-selector/core":"eEY3a","@ledgerhq/hw-transport-webhid":"8O295","near-api-js":"ohc3m","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"2AVrM":[function(require,module,exports) {
 "use strict";
 module.exports = isMobile;
 module.exports.isMobile = isMobile;
@@ -63690,7 +63594,7 @@ var _hidFramingDefault = parcelHelpers.interopDefault(_hidFraming);
 var _devices = require("@ledgerhq/devices");
 var _logs = require("@ledgerhq/logs");
 var _errors = require("@ledgerhq/errors");
-var Buffer = require("dc260ca5c7dddae9").Buffer;
+var Buffer = require("dbd338ecc68a48ec").Buffer;
 var __extends = undefined && undefined.__extends || function() {
     var extendStatics = function(d, b) {
         extendStatics = Object.setPrototypeOf || ({
@@ -64216,7 +64120,7 @@ function getFirstLedgerDevice() {
 }((0, _hwTransportDefault.default));
 exports.default = TransportWebHID;
 
-},{"dc260ca5c7dddae9":"jvRW7","@ledgerhq/hw-transport":"59Ey9","@ledgerhq/devices/lib/hid-framing":"fvgJh","@ledgerhq/devices":"fnHxP","@ledgerhq/logs":"i4OI0","@ledgerhq/errors":"EVZMy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"59Ey9":[function(require,module,exports) {
+},{"dbd338ecc68a48ec":"5trgY","@ledgerhq/hw-transport":"59Ey9","@ledgerhq/devices/lib/hid-framing":"fvgJh","@ledgerhq/devices":"fnHxP","@ledgerhq/logs":"i4OI0","@ledgerhq/errors":"EVZMy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"59Ey9":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "TransportError", ()=>(0, _errors.TransportError));
@@ -64665,7 +64569,7 @@ var __values = undefined && undefined.__values || function(o) {
 }();
 exports.default = Transport;
 
-},{"fb67993f24be70ba":"jvRW7","events":"1VQLm","@ledgerhq/errors":"EVZMy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1VQLm":[function(require,module,exports) {
+},{"fb67993f24be70ba":"5trgY","events":"1VQLm","@ledgerhq/errors":"EVZMy","@parcel/transformer-js/src/esmodule-helpers.js":"gkKU3"}],"1VQLm":[function(require,module,exports) {
 // Copyright Joyent, Inc. and other Node contributors.
 //
 // Permission is hereby granted, free of charge, to any person obtaining a
@@ -65610,7 +65514,7 @@ var initialAcc = {
 };
 exports["default"] = createHIDframing;
 
-},{"d4c8bfb843b9eea3":"jvRW7","e6b156846a9fe5f5":"EVZMy"}],"fnHxP":[function(require,module,exports) {
+},{"d4c8bfb843b9eea3":"5trgY","e6b156846a9fe5f5":"EVZMy"}],"fnHxP":[function(require,module,exports) {
 var parcelHelpers = require("@parcel/transformer-js/src/esmodule-helpers.js");
 parcelHelpers.defineInteropFlag(exports);
 parcelHelpers.export(exports, "IIGenericHID", ()=>IIGenericHID);

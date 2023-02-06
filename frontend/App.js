@@ -1,8 +1,6 @@
 import 'regenerator-runtime/runtime';
 import React from 'react';
-
 import './assets/global.css';
-
 import { EducationalText, SignInPrompt, SignOutButton } from './ui-components';
 import Home from './components/Home';
 
@@ -13,15 +11,15 @@ export default function App({ isSignedIn, contractId, wallet }) {
   const [uiPleaseWait, setUiPleaseWait] = React.useState(true);
 
   // Get blockchian state once on component load
-  React.useEffect(() => {
-    getGreeting()
-      .then(setValueFromBlockchain)
-      .catch(alert)
-      .finally(() => {
-        setUiPleaseWait(false);
-      });
-    }
-  , []);
+  // React.useEffect(() => {
+  //   getGreeting()
+  //     .then(setValueFromBlockchain)
+  //     .catch(alert)
+  //     .finally(() => {
+  //       setUiPleaseWait(false);
+  //     });
+  //   }
+  // , []);
 
   /// If user not signed-in with wallet - show prompt
   if (!isSignedIn) {
@@ -46,7 +44,7 @@ export default function App({ isSignedIn, contractId, wallet }) {
 
   return (
     <>
-    Hello World
+    <Home/>
     </>
   );
 }
