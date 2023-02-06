@@ -1,0 +1,5 @@
+/node_modules
+/frontend/node_modules/*
+contract/node_modules
+contract/build
+contract/neardev
